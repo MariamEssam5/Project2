@@ -1,6 +1,4 @@
 
-
-import javax.swing.*;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -10,40 +8,43 @@ public class NewClass {
 
             ArrayList<Integer> list = new ArrayList<>();
 
-            String sizeInput = JOptionPane.showInputDialog(null, "Enter size of the list:");
-            int n = Integer.parseInt(sizeInput);
+            System.out.println("Enter size of the list: ");
+            Scanner s = new Scanner(System.in);
+            int n = s.nextInt();
+            System.out.println("Enter elements of the list: ");
 
             for(int i = 0; i < n; i++){
-                String elementInput = JOptionPane.showInputDialog(null, "Enter element " + (i + 1) + " of the list:");
-                int x = Integer.parseInt(elementInput);
+                Scanner s1 = new Scanner(System.in);
+                int x = s1.nextInt();
                 list.add(x);
             }
 
-            String[] options = {"QuickSort", "MergeSort"};
-            int choice = JOptionPane.showOptionDialog(null, "Choose the sorting method:",
-                    "Sorting Method",
-                    JOptionPane.DEFAULT_OPTION,
-                    JOptionPane.INFORMATION_MESSAGE,
-                    null, options, options[0]);
+            System.out.println("Choose the sorting method: 1 for QuickSort, 2 for MergeSort");
+            System.out.println("1-QuickSort");
+            System.out.println("2-MergeSort");
+            int choice = s.nextInt();
 
             Sortable sorter;
             switch (choice) {
-                case 0:
+                case 1:
                     sorter = new QuickSort();
                     break;
-                case 1:
+                case 2:
                     sorter = new MergeSort();
                     break;
                 default:
-                    JOptionPane.showMessageDialog(null, "Wrong choice...");
+                    System.out.println("Wrong choice...");
                     continue;
             }
             sorter.sort(list);
 
-            JOptionPane.showMessageDialog(null, "Sorted array in descending order: " + list);
+            System.out.println("Sorted array in descending order: ");
+            System.out.println(list);
+            System.out.println();
 
-            int continueChoice = JOptionPane.showConfirmDialog(null, "Do you want to enter another array?", "Continue?", JOptionPane.YES_NO_OPTION);
-            if (continueChoice != JOptionPane.YES_OPTION) {
+            System.out.println("Do you want to enter another array? (Yes / No)");
+            String continueChoice = s.next();
+            if (!continueChoice.equals("Yes") && !continueChoice.equals("yes")) {
                 break;
             }
         }
